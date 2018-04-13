@@ -1,0 +1,18 @@
+nginx:
+    image: nginx:latest
+    #容器名
+    container_name: nginx
+    # 定义容器启动后的主机名，其他的服务可以用过这个名字访问
+    hostname: nginx
+    # 定义暴露端口，若写成 '80:80/tcp' 的格式则表示指定宿主机的80转发到容器的80，若写成 '80/tcp' 则表示Docker将随机分配一个宿主机端口给容器内的80端口，tcp表示协议类型    
+    restart: "always"
+    ports:
+      - 8889:80
+    volumes:
+      # 将docker-compose的相对目录下的nginx配置文件挂载到容器内的/etc/nginx/nginx.conf地方去，权限是只读
+      # 大致格式：src:dest:mode
+      # src: 可以是卷名，宿主机目录等，可以是文件或者目录，若是文件则文件必须存在，否则会是目录的形式挂载
+      # dest: 容器内的路径，可以是文件可以是目录，若是文件则文件必须存在，否则会是目录的形式挂载
+      # mode: 权限，只读(ro)，可读可写(rw)
+      - ~/nginx/www:/var/www/html
+      - ~/nginx/logs:/var/log/nginx

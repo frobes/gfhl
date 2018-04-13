@@ -1,0 +1,7 @@
+Rancher:
+   image: rancher/server:stable
+   restart: "always"
+   container_name: rancher
+   ports:
+     - "58080:8080"
+     - "3307:3306"
