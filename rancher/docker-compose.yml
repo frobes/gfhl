@@ -1,7 +1,11 @@
 Rancher:
+   #指定镜像名称
    image: rancher/server:stable
+   #保持重启
    restart: "always"
+   #指定容器名称
    container_name: rancher
+   #映射端口48080、43306
    ports:
-     - "58080:8080"
-     - "3307:3306"
+     - "48080:8080"
+     - "43306:3306"

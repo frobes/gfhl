@@ -39,3 +39,14 @@ for db in $databases; do
 
 # 删除生成的SQL文件
 rm -rf $basepath/*.sql
+
+#测试压缩文件是否完好
+cd $basepath
+tar -xvPf $db-$dt.sql.tar.gz 
+if [ -e $basepath$db-$dt.sql ]; then 
+  echo "该压缩文件完好，可正常解压！"
+  rm -rf $basepath/*.sql
+else
+  echo "该压缩文件已损坏"
+fi
+

@@ -1,25 +1,22 @@
 #!/bin/sh
 #author:huangweibo
 #date:2018-04-11 
-#添加用户并挂载
-user=mysql  
-group=mysql  
+#添加用户
+#user=mysql  
+#group=mysql  
 
 #用户组为空自动创建
-cat /etc/group |grep "^$group"  >& /dev/null  
-if [ $? -ne 0 ]; then  
-    groupadd $group  
-fi  
+#cat /etc/group |grep "^$group"  >& /dev/null  
+#if [ $? -ne 0 ]; then  
+#    groupadd $group  
+#fi  
   
 #用户为空则创建  
-cat /etc/passwd | grep "^$user" >& /dev/null  
-if [ $? -ne 0 ]; then  
-    useradd -g $group $user  
-fi  
+#cat /etc/passwd | grep "^$user" >& /dev/null  
+#if [ $? -ne 0 ]; then  
+#    useradd -g $group $user  
+#fi  
 
-mkdir -p /opt/mysql/data  /opt/mysql/log
-chmod -R 755 /opt/mysql
-chown -R mysql:mysql /opt/mysql
 
 echo "-------------------生成mysql镜像-----------"
 docker build -t  mysql5.7:1.0 .

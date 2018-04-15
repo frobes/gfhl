@@ -1,3 +1,3 @@
--- 创建数据库
+-- 创建数据库gfhl
 create database gfhl;
 show databases;

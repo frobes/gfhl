@@ -1,10 +1,13 @@
 FROM mysql:5.7
 MAINTAINER GZCSS/HUANGWEIBO
 
+#更新包缓存
 RUN  apt-get update && \
 apt-get install   wget vim zip ssh  telnet  curl  -y
+
 WORKDIR  /home
 RUN mkdir scripts
+
 #将所需文件放到镜像中
 ADD ./scripts/setup.sh /home/scripts/setup.sh
 ADD ./scripts/schema.sql /home/scripts/schema.sql

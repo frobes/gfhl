@@ -1,11 +1,14 @@
 #version: '2'
-mysqldb: 
+mysqldb:
+    #指定镜像名称 
     image: mysql5.7:1.0
+    #指定容器名称
     container_name: mysqldb
+    #保持重启
+    restart: "always"
+    #指定mysql数据库密码为gfhl
     environment: 
        - MYSQL_ROOT_PASSWORD=gfhl
+    #映射端口53306
     ports:
        - "53306:3306"
-#    volumes:
-#       - /opt/mysql/data:/var/lib/mysql
-#       - /opt/mysql/log:/var/log/mysql

@@ -1,0 +1,54 @@
+jenkins:
+     #可用image指定镜像或者build生成镜像。
+     image: hwb/jenkins:1.0
+     #build: ./jenkins
+     #容器名称
+     container_name: jenkins
+     #关联容器 jdk tomcat  maven
+     links:
+      - jdk
+      - tomcat
+      - maven
+     #环境变量设置
+     environment:
+      - JAVA_HOME=/usr/local/jdk1.8
+      - JRE_HOME=/usr/local/jdk1.8/jre
+      - CATALINA_HOME=/home/apache-tomcat-8.0.27
+      - M2_HOME=/home/maven/apache-maven-3.3.9
+     #映射端口18080 50000
+     ports:
+      - "18080:8080"
+      - "50000:50000"
+jdk:
+     image: hwb/jdk8:1.0
+     #build: ./jdk
+     container_name: jdk
+tomcat:
+     image: hwb/tomcat8:1.0
+     #build: ./tomcat
+     container_name: tomcat
+     links:
+      - jdk
+     #没有指定jdk环境变量无法启动tomcat
+     environment:
+      - JAVA_HOME=/usr/local/jdk1.8
+      - JRE_HOME=/usr/local/jdk1.8/jre
+     #映射端口28080
+     ports:
+      - "28080:8080"
+     #挂载项目位置
+     #  volumes:
+     #   - ./apache-tomcat-8.5.8/webapps/:/home/apache-tomcat-8.5.8/webapps
+maven:
+     image: hwb/maven3:1.0
+     #build: ./maven
+     container_name: maven3
+     links:
+      - jdk
+      - tomcat
+     environment:
+      - JAVA_HOME=/usr/local/jdk1.8
+      - JRE_HOME=/usr/local/jdk1.8/jre
+      - CATALINA_HOME=/home/apache-tomcat-8.0.27
+
+
